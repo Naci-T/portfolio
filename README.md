@@ -1,3 +1,3 @@
 # portfolio
 
-Here comes project description
+<img title="graph" alt="graph" src="./plot.jpg" width=800>
