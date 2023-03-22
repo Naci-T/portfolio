@@ -1,23 +1,27 @@
 # Portfolio optimization and prediction
 
-This project consists of two parts. The notebook portfolio_optimization_prediction.ipynb optimizes a portfolio and forecasts the future prices of this portfolio. The main portofolio optimisation.ipynb is the end product of the project but the methods in the predictions folder (predictions.ipynb, pycaret.ipynb) helped to choose the best method for the optimalisation of the project. 
+This project consists of two parts. The notebook [Optimalisation.ipynb](./Optimalisation.ipynb) optimizes a portfolio and forecasts the future prices of this portfolio. The main portofolio optimisation.ipynb is the end product of the project but the methods in the predictions folder ([prediction.ipynb](./predictions/prediction.ipynb) and [pycaret.ipynb](./predictions/pycaret.ipynb)) helped to choose the best method for the optimalisation of the project. 
 
 ## Part 1 - Portfolio optimization and prediction
+
 ### Introduction
 
-Here comes general information about portfolio optimization (general explanation efficient frontier etc? )
+PyPortfolioOpt is a library that implements portfolio optimization methods. We encourage the use of this portfolio as it's extensive and very easily extensible. In order to find the optimal portfolio, we have used the following classical techniques. 
 
-HERE COMES FIGURE 
+- Maximum Sharpe Ratio:
+This method is used to construct a portfolio that maximizes the Sharpe ratio, which is a measure of the risk-adjusted return of the portfolio.
 
-### Requirements
+- Efficient Risk:
+This method is used to construct a portfolio that maximizes the expected return for a given level of risk, or alternatively, minimizes the risk for a given level of expected return. 
 
-Make requirements .txt
+The explanation of the different methods and more information about portfolio optimization can be found in the documentation of [PyPortfolioOpt](https://pyportfolioopt.readthedocs.io/en/latest/MeanVariance.html).
+
 
 ### Usage 
-After the functions there's an example of how to use the functions. It's advised to make a new function to test
-several stocks. Here is an example of how to use the functions: 
-- Enter the start and end dates for which you want to get the historical stock data.
+
+The notebooks start with important functions that can be called in order to find the optimal portfolio and predict future prices. Here is an example of how to use those functions: 
 - Enter the list of stocks you want to analyze.
+- Use the `get_data` function and enter the start and end dates for which you want to get the historical stock data.
 - Use the `optimize_portfolio` function to optimize the portfolio based on the desired method ('sharpe' or 'risk').
 - Use the `info` function to see the expected annual return, annual volatility, and Sharpe ratio of the portfolio.
 - Use the `number_of_stocks_to_buy` function to get the number of stocks to buy with the given investment amount.
@@ -27,17 +31,22 @@ Illustration of how the output looks when you plan to invest $ 10,000 in 8 stock
 
 <img title="graph" alt="graph" src="./images/example.png" width="800">
 
-Here comes the prediction part!
+After the optimization part you will get the optimalized dataframe with selected stocks and weighted close price of the portfolio. This will than be used the predict the future portfolio price. 
+
+<img title="graph" alt="graph" src="./images/prediction.png" width="800">
+
+It suffices to use the 'best portfolio' column in the following functions to make a future prediction: 
+- `prepare_data()`
+- `predict_head()`
+
 
 ##  Part 2 - Prediction of stock prices with xgboost and pycaret
 
-requirements.txt
-
 ### Introduction
 
-The notebooks [prediction.ipynb](./predictions/prediction.ipynb) and [pycaret.ipynb](./predictions/pycaret.ipynb) (in folder 'predictions') are mainly used to explore different methods in order to forecast future stock prices. The first one used 'xgboost' whereas the second notebook used the library pycaret which is suitable for people with less experience in machine learning.  
+The notebooks [prediction.ipynb](./predictions/prediction.ipynb) and [pycaret.ipynb](./predictions/pycaret.ipynb) (in folder 'predictions') are mainly used to explore different methods in order to forecast future stock prices. In the first notebook, we utilized the 'xgboost' library, while in the second notebook, we opted for the 'pycaret' library, which is particularly well-suited for individuals with limited experience in machine learning.
 
-The main idea was to select the best method in order to use in the project [Optimalisation.ipynb](./Optimalisation.ipynb) above. The information below is only valid for the notebook [prediction.ipynb]. 
+The main idea was to select the best (forecasting) method in order to use it in the main project [Optimalisation.ipynb](./Optimalisation.ipynb) above. The information below is only valid for the notebook [prediction.ipynb](./predictions/prediction.ipynb). 
 
 #### Data Retrieval and Preparation
 
@@ -57,11 +66,19 @@ We evaluate our model by computing the root mean squared error (RMSE) on the tes
 
 Finally, we predict the stock prices for the future 5 business days as from January 1st, 2023. We use the predict_head() function to make the prediction. Note that the predict_head() function will only predict the future 5 business days as from January 1st, 2023, and the function is hardcoded to use the best model we found earlier in the notebook. If you wish to make a prediction for a different date range, you will need to modify the function accordingly.
 
+#### Pycaret
+
+As part of finding the optimal prediction method, we have also explored the librabry pycaret. Keep in mind that this library only works in a Python environment with a Python version of 3.9. 
+
+
 ## Conclusion
 This project shows how to optimize a portfolio and predict stock prices using different techniques. Feel free to modify the code and add more features to make it more useful for your needs. 
 
 ## Limitations
 
-Here comes limitations
+- In order to use and test the model for several tasks, it's needed to adjust many things manually. There should be a function implemented to do this more easily. There is also no error handling when downloading large datasets. It's thinkable that errors will occur, hence this needs further improvement. 
+- The main drawback of mean-variance optimization is that the theoretical treatment requires knowledge of the expected returns and the future risk-characteristics (covariance) of the assets
+- There are many ways to optimize a portfolio. This work only consisted of two approaches.
+
 
 
