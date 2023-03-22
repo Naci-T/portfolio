@@ -1,6 +1,6 @@
 # Portfolio optimization and prediction
 
-This project consists of two parts. The notebook [Optimalisation.ipynb](./Optimalisation.ipynb) optimizes a portfolio and forecasts the future prices of this portfolio. The main [Optimalisation.ipynb](./Optimalisation.ipynb) is the end product of the project but the methods in the predictions folder ([prediction.ipynb](./predictions/prediction.ipynb) and [pycaret.ipynb](./predictions/pycaret.ipynb)) helped to choose the best method for the finalisation of the project. 
+This project consists of two parts. The notebook [Optimalisation.ipynb](./Optimalisation.ipynb) optimizes a portfolio and forecasts the future prices of this portfolio. The main notebook ([Optimalisation.ipynb](./Optimalisation.ipynb)) is the end product of the project but the methods in the predictions folder ([prediction.ipynb](./predictions/prediction.ipynb) and [pycaret.ipynb](./predictions/pycaret.ipynb)) helped to choose the best method for the finalisation of the project. 
 
 ## Part 1 - Portfolio optimization and prediction
 
@@ -19,17 +19,19 @@ The explanation of the different methods and more information about portfolio op
 
 ### Usage 
 
-The notebook start with important functions that can be called in order to find the optimal portfolio and predict its future prices. Here is an example of how to use those functions: 
+The notebook starts with important functions that can be called in order to find the optimal portfolio and predict its future prices. Here is an example of how to use those functions: 
 - Enter the list of stocks you want to analyze.
-- Use the `get_data` function and enter the start and end dates for which you want to get the historical stock data.
+- Use the `get_data` function and enter the start and end dates for which you want to get the historical stock data. This will retrieve the adjusted closing prices for a list of stocks using Yahoo Finance API.
 - Use the `optimize_portfolio` function to optimize the portfolio based on the desired method ('sharpe' or 'risk').
 - Use the `info` function to see the expected annual return, annual volatility, and Sharpe ratio of the portfolio.
 - Use the `number_of_stocks_to_buy` function to get the number of stocks to buy with the given investment amount.
 - Use the `pie_plot` function to create a pie chart showing the distribution of the portfolio weights.
 
-Illustration: 8 stocks and investment of $ 10,000: 
+### Illustration with 8 stocks and investment of $ 10,000: 
 
 <img title="graph" alt="graph" src="./images/example.png" width="800">
+
+### Prediction 
 
 After the optimization part you will get the optimalized dataframe with selected stocks and weighted close prices of the portfolio. This will than be used the predict the future portfolio prices. 
 
@@ -44,13 +46,13 @@ It suffices to use the 'Best portfolio' column in the following functions to mak
 
 ### Introduction
 
-The notebooks [prediction.ipynb](./predictions/prediction.ipynb) and [pycaret.ipynb](./predictions/pycaret.ipynb) (in folder 'predictions') are mainly used to explore different methods in order to forecast future stock prices. In the first notebook, we utilized the 'xgboost' library, while in the second notebook, we opted for the 'pycaret' library, which is particularly well-suited for individuals with limited experience in machine learning.
+The notebooks [prediction.ipynb](./predictions/prediction.ipynb) and [pycaret.ipynb](./predictions/pycaret.ipynb) (in folder 'predictions') are mainly used to explore different methods in order to forecast future stock prices. In the first notebook, we utilized the `xgboost` library, while in the second notebook, we opted for the 'pycaret' library, which is particularly well-suited for individuals with limited experience in machine learning.
 
-The main idea was to select the best (forecasting) method in order to use it in the main project [Optimalisation.ipynb](./Optimalisation.ipynb) above. We'll first explain the methodology of xgboost, followed by pycaret.  
+The main idea was to select the best (forecasting) method in order to use it in the main project [Optimalisation.ipynb](./Optimalisation.ipynb) above. We'll first explain the methodology of `xgboost`, followed by pycaret.  
 
 #### Data Retrieval and Preparation
 
-In the first section of the notebook , we retrieve the adjusted closing prices for a list of stocks using Yahoo Finance API. We use the get_data() function to retrieve the data for a specified date range. We then use the prepare_data() function to prepare the data for modeling. In this function, we add lag to the data and split it into training and test sets.
+In the first section of the notebook , we retrieve the adjusted closing prices for a list of stocks using Yahoo Finance API. We use the `get_data` function to retrieve the data for a specified date range. We then use the `prepare_data` function to prepare the data for modeling. In this function, we add lag to the data and split it into training and test sets.
 
 
 #### Modeling 
