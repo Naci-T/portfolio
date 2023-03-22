@@ -1,6 +1,6 @@
 # Portfolio optimization and prediction
 
-This project consists of two parts. The notebook [Optimalisation.ipynb](./Optimalisation.ipynb) optimizes a portfolio and forecasts the future prices of this portfolio. The main portofolio optimisation.ipynb is the end product of the project but the methods in the predictions folder ([prediction.ipynb](./predictions/prediction.ipynb) and [pycaret.ipynb](./predictions/pycaret.ipynb)) helped to choose the best method for the optimalisation of the project. 
+This project consists of two parts. The notebook [Optimalisation.ipynb](./Optimalisation.ipynb) optimizes a portfolio and forecasts the future prices of this portfolio. The main [Optimalisation.ipynb](./Optimalisation.ipynb) is the end product of the project but the methods in the predictions folder ([prediction.ipynb](./predictions/prediction.ipynb) and [pycaret.ipynb](./predictions/pycaret.ipynb)) helped to choose the best method for the finalisation of the project. 
 
 ## Part 1 - Portfolio optimization and prediction
 
@@ -19,7 +19,7 @@ The explanation of the different methods and more information about portfolio op
 
 ### Usage 
 
-The notebooks start with important functions that can be called in order to find the optimal portfolio and predict future prices. Here is an example of how to use those functions: 
+The notebook start with important functions that can be called in order to find the optimal portfolio and predict its future prices. Here is an example of how to use those functions: 
 - Enter the list of stocks you want to analyze.
 - Use the `get_data` function and enter the start and end dates for which you want to get the historical stock data.
 - Use the `optimize_portfolio` function to optimize the portfolio based on the desired method ('sharpe' or 'risk').
@@ -27,15 +27,15 @@ The notebooks start with important functions that can be called in order to find
 - Use the `number_of_stocks_to_buy` function to get the number of stocks to buy with the given investment amount.
 - Use the `pie_plot` function to create a pie chart showing the distribution of the portfolio weights.
 
-Illustration of how the output looks when you plan to invest $ 10,000 in 8 stocks: 
+Illustration: 8 stocks and investment of $ 10,000: 
 
 <img title="graph" alt="graph" src="./images/example.png" width="800">
 
-After the optimization part you will get the optimalized dataframe with selected stocks and weighted close price of the portfolio. This will than be used the predict the future portfolio price. 
+After the optimization part you will get the optimalized dataframe with selected stocks and weighted close prices of the portfolio. This will than be used the predict the future portfolio prices. 
 
 <img title="graph" alt="graph" src="./images/prediction.png" width="800">
 
-It suffices to use the 'best portfolio' column in the following functions to make a future prediction: 
+It suffices to use the 'Best portfolio' column in the following functions to make a future prediction: 
 - `prepare_data()`
 - `predict_head()`
 
@@ -46,39 +46,56 @@ It suffices to use the 'best portfolio' column in the following functions to mak
 
 The notebooks [prediction.ipynb](./predictions/prediction.ipynb) and [pycaret.ipynb](./predictions/pycaret.ipynb) (in folder 'predictions') are mainly used to explore different methods in order to forecast future stock prices. In the first notebook, we utilized the 'xgboost' library, while in the second notebook, we opted for the 'pycaret' library, which is particularly well-suited for individuals with limited experience in machine learning.
 
-The main idea was to select the best (forecasting) method in order to use it in the main project [Optimalisation.ipynb](./Optimalisation.ipynb) above. The information below is only valid for the notebook [prediction.ipynb](./predictions/prediction.ipynb). 
+The main idea was to select the best (forecasting) method in order to use it in the main project [Optimalisation.ipynb](./Optimalisation.ipynb) above. We'll first explain the methodology of xgboost, followed by pycaret.  
 
 #### Data Retrieval and Preparation
 
-In the first section of the notebook, we retrieve the adjusted closing prices for a list of stocks using Yahoo Finance API. We use the get_data() function to retrieve the data for a specified date range. We then use the prepare_data() function to prepare the data for modeling. In this function, we add lag to the data and split it into training and test sets.
+In the first section of the notebook , we retrieve the adjusted closing prices for a list of stocks using Yahoo Finance API. We use the get_data() function to retrieve the data for a specified date range. We then use the prepare_data() function to prepare the data for modeling. In this function, we add lag to the data and split it into training and test sets.
 
 
 #### Modeling 
 
-We use XGBOOST to build a regression model to predict the stock price of Microsoft. First, we train an XGBOOST model with default parameters using XGBRegressor(). We then use a grid search to find the best hyperparameters for our model using GridSearchCV(). We search over the hyperparameters n_estimators, max_depth, and learning_rate.
+We use `xgboost` to build a regression model to predict the stock price of Microsoft. First, we train an `xgboost` model with default parameters using `XGBRegressor()`. We then use a grid search to find the best hyperparameters for our model using `GridSearchCV()`. We search over the hyperparameters `n_estimators`, `max_depth`, and `learning_rate`.
 
-After finding the best parameters using the grid search, we build our final XGBOOST model with the hyperparameters. We use XGBRegressor() to build the model with objective='reg:squarederror', n_estimators=500, early_stopping_rounds=50, learning_rate=0.01, and max_depth=7. 
+After finding the best parameters using the grid search, we build our final `xgboost` model with the hyperparameters. 
 
-We evaluate our model by computing the root mean squared error (RMSE) on the test set using mean_squared_error(). We compare the predicted values to the actual values by plotting them using matplotlib.
+We evaluate our model by computing the root mean squared error (RMSE) on the test set using `mean_squared_error()`. We compare the predicted values to the actual values by plotting them using matplotlib.
 
 
 #### Prediction 
 
-Finally, we predict the stock prices for the future 5 business days as from January 1st, 2023. We use the predict_head() function to make the prediction. Note that the predict_head() function will only predict the future 5 business days as from January 1st, 2023, and the function is hardcoded to use the best model we found earlier in the notebook. If you wish to make a prediction for a different date range, you will need to modify the function accordingly.
+Finally, we predict the stock prices for the future 5 business days as from January 1st, 2023. We use the `predict_head()` function to make the prediction. Note that the `predict_head()` function will only predict the future 5 business days as from January 1st, 2023, and the function is hardcoded to use the best model we found earlier in the notebook. If you wish to make a prediction for a different date range, you will need to modify the function accordingly.
 
 #### Pycaret
 
-As part of finding the optimal prediction method, we have also explored the librabry pycaret. Keep in mind that this library only works in a Python environment with a Python version of 3.9. 
+As part of finding the optimal prediction method, we have also explored the librabry pycaret. Keep in mind that this library only works in a Python environment with a Python version of 3.9. There was no `xgboost` in my version of Pycaret and the results of the other models where not better than the `xgboost` model that we have tried earlier. 
 
 
 ## Conclusion
-This project shows how to optimize a portfolio and predict stock prices using different techniques. Feel free to modify the code and add more features to make it more useful for your needs. 
+
+In conclusion, this portfolio optimization and prediction project was a valuable learning experience for us. It provided a deep understanding of financial terminology and the use of libraries like PyPortfolio and Pycaret for optimization and prediction. While the process of choosing the best portfolio was intriguing, we found that predicting stock prices was not as effective. Despite the numerous methods employed, the R-square values indicated that an average of the stock prices would be a better predictor than the machine learning models utilized. Nonetheless, the exploration of various paths in time series forecasting was a necessary step in understanding the complexity of this field. Overall, this project serves as a foundation for further exploration and development in the exciting world of financial prediction and optimization.
 
 ## Limitations
 
-- In order to use and test the model for several tasks, it's needed to adjust many things manually. There should be a function implemented to do this more easily. There is also no error handling when downloading large datasets. It's thinkable that errors will occur, hence this needs further improvement. 
-- The main drawback of mean-variance optimization is that the theoretical treatment requires knowledge of the expected returns and the future risk-characteristics (covariance) of the assets
-- There are many ways to optimize a portfolio. This work only consisted of two approaches.
+- Historical returns have certain limitations when it comes to portfolio optimization, and other approaches are available that can be incorporated into the model.
+
+- No error handling is implemented when downloading large datasets, which could lead to potential errors. Further improvement is needed, and it's also advisable to save the downloaded data.
+
+- There seems to be an issue with displaying some graphs in the notebooks. It is recommended to run all the notebooks to view the graphs, particularly in the Pycaret notebook.
+
+- The optimization and prediction examples and functions require individual adjustments to be utilized and tested. This is not ideal and should be avoided in future works.
+
+- The same functions are utilized in multiple notebooks, which could be resolved by creating a separate .py file for the functions and importing them easily from there.
+
+- The focus of the prediction is mainly on machine learning models and not statistical approaches. It would be beneficial to explore both paths.
+
+
+
+
+
+
+
+
 
 
 
