@@ -6,7 +6,7 @@ This project consists of two parts. The notebook [Optimalisation.ipynb](./Optima
 
 ### Introduction
 
-PyPortfolioOpt is a library that implements portfolio optimization methods. We encourage the use of this portfolio as it's extensive and very easily extensible. In order to find the optimal portfolio, we have used the following classical techniques. 
+`PyPortfolioOpt` is a library that implements portfolio optimization methods. We encourage the use of this portfolio as it's extensive and very easily extensible. In order to find the optimal portfolio, we have used the following classical techniques. 
 
 - Maximum Sharpe Ratio:
 This method is used to construct a portfolio that maximizes the Sharpe ratio, which is a measure of the risk-adjusted return of the portfolio.
@@ -33,7 +33,7 @@ The notebook starts with important functions that can be called in order to find
 
 ### Prediction 
 
-After the optimization part you will get the optimalized dataframe with selected stocks and weighted close prices of the portfolio. This will than be used the predict the future portfolio prices. 
+After the optimization part you will get the optimalized dataframe with selected stocks and weighted close prices of the portfolio. This will than be used to predict the future portfolio prices. 
 
 <img title="graph" alt="graph" src="./images/prediction.png" width="800">
 
@@ -48,7 +48,7 @@ It suffices to use the 'Best portfolio' column in the following functions to mak
 
 The notebooks [prediction.ipynb](./predictions/prediction.ipynb) and [pycaret.ipynb](./predictions/pycaret.ipynb) (in folder 'predictions') are mainly used to explore different methods in order to forecast future stock prices. In the first notebook, we utilized the `xgboost` library, while in the second notebook, we opted for the 'pycaret' library, which is particularly well-suited for individuals with limited experience in machine learning.
 
-The main idea was to select the best (forecasting) method in order to use it in the main project [Optimalisation.ipynb](./Optimalisation.ipynb) above. We'll first explain the methodology of `xgboost`, followed by pycaret.  
+The main idea was to select the best (forecasting) method in order to use it in the main project [Optimalisation.ipynb](./Optimalisation.ipynb) above. We'll first explain the methodology of `xgboost`, followed by `pycaret`.  
 
 #### Data Retrieval and Preparation
 
@@ -70,12 +70,12 @@ Finally, we predict the stock prices for the future 5 business days as from Janu
 
 #### Pycaret
 
-As part of finding the optimal prediction method, we have also explored the librabry pycaret. Keep in mind that this library only works in a Python environment with a Python version of 3.9. There was no `xgboost` in my version of Pycaret and the results of the other models where not better than the `xgboost` model that we have tried earlier. 
+As part of finding the optimal prediction method, we have also explored the library `pycaret`. Keep in mind that this library only works in a Python environment with a Python version of 3.9. There was no `xgboost` in this version of `Pycaret` and the results of the other models where not better than the `xgboost` model that we have tried earlier. 
 
 
 ## Conclusion
 
-In conclusion, this portfolio optimization and prediction project was a valuable learning experience for us. It provided a deep understanding of financial terminology and the use of libraries like PyPortfolio and Pycaret for optimization and prediction. While the process of choosing the best portfolio was intriguing, we found that predicting stock prices was not as effective. Despite the numerous methods employed, the R-square values indicated that an average of the stock prices would be a better predictor than the machine learning models utilized. Nonetheless, the exploration of various paths in time series forecasting was a necessary step in understanding the complexity of this field. Overall, this project serves as a foundation for further exploration and development in the exciting world of financial prediction and optimization.
+This portfolio optimization and prediction project was a valuable learning experience for us. It provided a deep understanding of financial terminology and the use of libraries like `PyPortfolio` and `Pycaret` for optimization and prediction. While the process of choosing the best portfolio was intriguing, we found that predicting stock prices was not as effective. Despite the numerous methods employed, the R-square values indicated that an average of the stock prices would be a better predictor than the machine learning models utilized. Nonetheless, the exploration of various paths in time series forecasting was a necessary step in understanding the complexity of this field. Overall, this project serves as a foundation for further exploration and development in the exciting world of financial prediction and optimization.
 
 ## Limitations
 
